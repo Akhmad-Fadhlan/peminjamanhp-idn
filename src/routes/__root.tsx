@@ -6,11 +6,29 @@ import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold">404</h1>
-        <p className="mt-2 text-sm text-muted-foreground">Halaman tidak ditemukan</p>
-        <Link to="/" className="btn-primary mt-6 inline-flex">Kembali ke beranda</Link>
+    <div className="flex min-h-screen items-center justify-center px-4 bg-gradient-to-br from-background via-accent/20 to-background">
+      <div className="max-w-sm text-center animate-fade-up">
+        <div
+          className="mx-auto mb-6 w-24 h-24 rounded-3xl grid place-items-center"
+          style={{ background: "oklch(0.52 0.22 265 / 0.1)", border: "1.5px solid oklch(0.52 0.22 265 / 0.15)" }}
+        >
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="oklch(0.52 0.22 265)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 8v4M12 16h.01" />
+          </svg>
+        </div>
+        <h1 className="text-5xl font-bold tracking-tight" style={{ color: "var(--color-primary)" }}>404</h1>
+        <p className="mt-3 text-base font-semibold text-foreground">Halaman tidak ditemukan</p>
+        <p className="mt-1 text-sm text-muted-foreground">Sepertinya halaman yang kamu cari tidak ada.</p>
+        <Link
+          to="/"
+          className="btn-primary mt-6 inline-flex"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M19 12H5M12 5l-7 7 7 7" />
+          </svg>
+          Kembali ke beranda
+        </Link>
       </div>
     </div>
   );
@@ -22,14 +40,12 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
       { title: "IDN Monitoring HP" },
-      { name: "description", content: "Sistem monitoring peminjaman HP siswa" },
-      { name: "theme-color", content: "#3b5bdb" },
+      { name: "description", content: "Sistem monitoring peminjaman HP siswa IDN" },
+      { name: "theme-color", content: "#4c3bdb" },
       { property: "og:title", content: "IDN Monitoring HP" },
       { name: "twitter:title", content: "IDN Monitoring HP" },
-      { property: "og:description", content: "Sistem monitoring peminjaman HP siswa" },
-      { name: "twitter:description", content: "Sistem monitoring peminjaman HP siswa" },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/45a91391-3998-443f-9f69-46c36b9038d5/id-preview-968728d5--70c99ca0-98cb-4d54-b09f-ce8251ed7b63.lovable.app-1777609474872.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/45a91391-3998-443f-9f69-46c36b9038d5/id-preview-968728d5--70c99ca0-98cb-4d54-b09f-ce8251ed7b63.lovable.app-1777609474872.png" },
+      { property: "og:description", content: "Sistem monitoring peminjaman HP siswa IDN" },
+      { name: "twitter:description", content: "Sistem monitoring peminjaman HP siswa IDN" },
       { name: "twitter:card", content: "summary_large_image" },
       { property: "og:type", content: "website" },
     ],
@@ -56,7 +72,19 @@ function RootComponent() {
   return (
     <AuthProvider>
       <Outlet />
-      <Toaster position="top-center" richColors closeButton />
+      <Toaster
+        position="top-center"
+        richColors
+        closeButton
+        toastOptions={{
+          style: {
+            fontFamily: "'Inter', sans-serif",
+            fontSize: "13px",
+            fontWeight: "500",
+            borderRadius: "14px",
+          },
+        }}
+      />
     </AuthProvider>
   );
 }
