@@ -36,39 +36,28 @@
 :root {
   --radius: 1rem;
 
-  /* Premium deep navy-indigo palette */
   --background: oklch(0.97 0.008 250);
   --foreground: oklch(0.15 0.035 265);
-
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.15 0.035 265);
-
   --primary: oklch(0.52 0.22 265);
   --primary-foreground: oklch(0.99 0 0);
-
   --secondary: oklch(0.96 0.012 255);
   --secondary-foreground: oklch(0.25 0.05 265);
-
   --muted: oklch(0.95 0.008 255);
   --muted-foreground: oklch(0.52 0.025 265);
-
   --accent: oklch(0.94 0.03 255);
   --accent-foreground: oklch(0.25 0.05 265);
-
   --success: oklch(0.62 0.18 152);
   --success-foreground: oklch(0.99 0 0);
-
   --warning: oklch(0.76 0.17 75);
   --warning-foreground: oklch(0.18 0.06 60);
-
   --destructive: oklch(0.58 0.24 27);
   --destructive-foreground: oklch(0.99 0 0);
-
   --border: oklch(0.91 0.01 255);
   --input: oklch(0.93 0.012 255);
   --ring: oklch(0.52 0.22 265);
 
-  /* Gradient tokens */
   --gradient-primary: linear-gradient(135deg, oklch(0.42 0.24 270), oklch(0.58 0.22 255));
   --gradient-header: linear-gradient(135deg, oklch(0.38 0.26 272), oklch(0.52 0.24 258), oklch(0.62 0.20 248));
   --shadow-card: 0 1px 3px rgba(0,0,0,.06), 0 4px 16px rgba(80,70,180,.07);
@@ -86,8 +75,6 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-
-  /* Smooth scrollbar */
   ::-webkit-scrollbar { width: 6px; height: 6px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: oklch(0.82 0.02 255); border-radius: 99px; }
@@ -95,34 +82,46 @@
 }
 
 /* ========================
-   BUTTONS
+   BUTTONS — using @layer components to allow pseudo-classes
 ======================== */
-@utility btn {
-  @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed select-none;
-}
-@utility btn-primary {
-  @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed select-none;
-  background: var(--gradient-primary);
-  color: oklch(0.99 0 0);
-  box-shadow: 0 2px 8px oklch(0.52 0.22 265 / 0.35);
-}
-@utility btn-primary:hover {
-  opacity: 0.92;
-  box-shadow: 0 4px 16px oklch(0.52 0.22 265 / 0.45);
-  transform: translateY(-1px);
-}
-@utility btn-secondary {
-  @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed select-none bg-secondary text-secondary-foreground;
-}
-@utility btn-secondary:hover {
-  @apply bg-accent;
-}
-@utility btn-danger {
-  @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed select-none bg-destructive text-destructive-foreground;
-  box-shadow: 0 2px 8px oklch(0.58 0.24 27 / 0.3);
-}
-@utility btn-ghost {
-  @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed select-none bg-transparent hover:bg-accent text-foreground;
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed select-none;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed select-none;
+    background: var(--gradient-primary);
+    color: oklch(0.99 0 0);
+    box-shadow: 0 2px 8px oklch(0.52 0.22 265 / 0.35);
+  }
+  .btn-primary:hover:not(:disabled) {
+    opacity: 0.91;
+    box-shadow: 0 4px 16px oklch(0.52 0.22 265 / 0.45);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed select-none bg-secondary text-secondary-foreground;
+  }
+  .btn-secondary:hover:not(:disabled) {
+    @apply bg-accent;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed select-none bg-destructive text-destructive-foreground;
+    box-shadow: 0 2px 8px oklch(0.58 0.24 27 / 0.3);
+  }
+  .btn-danger:hover:not(:disabled) {
+    opacity: 0.91;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed select-none bg-transparent text-foreground;
+  }
+  .btn-ghost:hover:not(:disabled) {
+    @apply bg-accent;
+  }
 }
 
 /* ========================
@@ -132,9 +131,12 @@
   @apply w-full rounded-xl border border-border bg-white px-4 py-2.5 text-sm outline-none transition-all duration-200 placeholder:text-muted-foreground/60;
   box-shadow: 0 1px 2px rgba(0,0,0,.04);
 }
-@utility input:focus {
-  @apply border-ring;
-  box-shadow: 0 0 0 3px oklch(0.52 0.22 265 / 0.12), 0 1px 2px rgba(0,0,0,.04);
+
+@layer components {
+  .input:focus {
+    @apply border-ring;
+    box-shadow: 0 0 0 3px oklch(0.52 0.22 265 / 0.12), 0 1px 2px rgba(0,0,0,.04);
+  }
 }
 
 /* ========================
@@ -162,7 +164,7 @@
 }
 @utility badge-danger {
   @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold;
-  background: oklch(0.58 0.24 27 / 0.1);
+  background: oklch(0.58 0.24 27 / 0.10);
   color: oklch(0.52 0.22 27);
   border: 1px solid oklch(0.58 0.24 27 / 0.2);
 }
@@ -191,17 +193,12 @@
   from { opacity: 0; transform: translateY(100%); }
   to   { opacity: 1; transform: translateY(0); }
 }
-@keyframes pulse-ring {
-  0%   { box-shadow: 0 0 0 0 oklch(0.52 0.22 265 / 0.4); }
-  70%  { box-shadow: 0 0 0 10px oklch(0.52 0.22 265 / 0); }
-  100% { box-shadow: 0 0 0 0 oklch(0.52 0.22 265 / 0); }
-}
 @keyframes shimmer {
   0%   { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
 
-.animate-fade-up { animation: fadeInUp 0.4s ease both; }
+.animate-fade-up  { animation: fadeInUp 0.4s ease both; }
 .animate-scale-in { animation: scaleIn 0.3s ease both; }
 .animate-slide-up { animation: slideUp 0.35s ease both; }
 
@@ -215,17 +212,12 @@
 
 /* Glass effect */
 .glass {
-  background: rgba(255,255,255,0.72);
+  background: rgba(255,255,255,0.80);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
 }
 
-/* Gradient header */
-.header-gradient {
-  background: var(--gradient-header);
-}
-
-/* Avatar gradient */
+/* Gradient avatar */
 .avatar-gradient {
-  background: linear-gradient(135deg, oklch(0.52 0.22 265), oklch(0.62 0.20 248));
+  background: var(--gradient-primary);
 }
